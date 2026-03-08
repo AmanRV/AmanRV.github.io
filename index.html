@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Aman Rajesh</title>
     
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a6e3a1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='4 17 10 11 4 5'></polyline><line x1='12' y1='19' x2='20' y2='19'></line></svg>">
@@ -41,7 +41,7 @@
             padding: 0;
             height: 100vh;
             width: 100vw;
-            overflow: hidden; /* Prevents the whole page from scrolling */
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -90,9 +90,9 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            height: 85vh; /* Fixed height relative to viewport */
-            position: relative; /* Needed for CRT overlay */
-            margin-top: 20px; /* Offset to account for the top bar visually */
+            height: 85vh; 
+            position: relative; 
+            margin-top: 20px; 
         }
 
         /* --- CRT RETRO EFFECT OVERLAY --- */
@@ -104,13 +104,12 @@
             left: 0;
             bottom: 0;
             right: 0;
-            /* Scanlines and RGB sub-pixel mimicry */
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%), 
                         linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
             background-size: 100% 3px, 3px 100%;
             z-index: 100;
-            pointer-events: none; /* Allows you to click the links beneath the overlay */
-            box-shadow: inset 0 0 70px rgba(0,0,0,0.4); /* Screen Vignette */
+            pointer-events: none; 
+            box-shadow: inset 0 0 70px rgba(0,0,0,0.4); 
             border-radius: 8px;
         }
 
@@ -148,7 +147,6 @@
             box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
         }
 
-        /* Active tab accent line */
         .tab::after {
             content: '';
             position: absolute;
@@ -221,31 +219,25 @@
         /* Terminal Body */
         .terminal-body {
             padding: 25px 35px;
-            overflow-y: auto; /* Only the terminal content scrolls */
+            overflow-y: auto; 
             flex-grow: 1;
         }
 
-        .terminal-body::-webkit-scrollbar {
-            width: 12px;
-        }
-        .terminal-body::-webkit-scrollbar-track {
-            background: var(--base);
-        }
+        .terminal-body::-webkit-scrollbar { width: 12px; }
+        .terminal-body::-webkit-scrollbar-track { background: var(--base); }
         .terminal-body::-webkit-scrollbar-thumb {
             background: var(--surface1);
             border-radius: 6px;
             border: 3px solid var(--base);
         }
-        .terminal-body::-webkit-scrollbar-thumb:hover {
-            background: var(--surface2);
-        }
+        .terminal-body::-webkit-scrollbar-thumb:hover { background: var(--surface2); }
 
         /* Animated ASCII Name Container */
         .ascii-container {
             display: flex;
             justify-content: center;
             margin: 10px 0 30px 0;
-            perspective: 800px; /* Gives the 3D depth effect */
+            perspective: 800px;
         }
 
         #name-art {
@@ -268,16 +260,12 @@
             flex-wrap: wrap;
         }
 
-        /* Refined, subtle text-shadow for terminal shine effect */
         .user { color: var(--green); font-weight: bold; text-shadow: 0 0 2px rgba(166, 227, 161, 0.6); }
         .colon { color: var(--text); }
         .dir { color: var(--blue); font-weight: bold; margin-right: 10px; text-shadow: 0 0 2px rgba(137, 180, 250, 0.6); }
         .command { color: var(--yellow); font-weight: bold; text-shadow: 0 0 2px rgba(249, 226, 175, 0.6); }
 
-        .output {
-            margin-left: 10px;
-            margin-bottom: 20px;
-        }
+        .output { margin-left: 10px; margin-bottom: 20px; }
 
         .output-block {
             margin-bottom: 25px;
@@ -294,13 +282,8 @@
             gap: 10px;
         }
 
-        .subtitle {
-            color: var(--subtext0);
-            font-size: 13px;
-            margin-bottom: 8px;
-        }
+        .subtitle { color: var(--subtext0); font-size: 13px; margin-bottom: 8px; }
 
-        /* SVG AMD Logo with Catppuccin Green mask */
         .amd-logo {
             display: inline-block;
             width: 48px;
@@ -310,31 +293,14 @@
             mask: url('https://upload.wikimedia.org/wikipedia/commons/7/7c/AMD_Logo.svg') no-repeat center / contain;
         }
 
-        .file-list {
-            display: table;
-            width: 100%;
-        }
-
-        .file-row {
-            display: table-row;
-        }
-
-        .file-row > div {
-            display: table-cell;
-            padding: 6px 15px 6px 0;
-            vertical-align: top;
-        }
-
+        .file-list { display: table; width: 100%; }
+        .file-row { display: table-row; }
+        .file-row > div { display: table-cell; padding: 6px 15px 6px 0; vertical-align: top; }
         .file-date { color: var(--subtext0); white-space: nowrap; }
         .file-name { color: var(--blue); font-weight: bold; white-space: nowrap; }
         .file-desc { color: var(--text); }
 
-        .skills-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
+        .skills-grid { display: flex; flex-wrap: wrap; gap: 10px; }
         .skill {
             background: var(--surface0);
             color: var(--text);
@@ -350,13 +316,10 @@
             text-decoration-style: dashed;
             text-underline-offset: 4px;
             position: relative;
-            z-index: 10; /* Keep links clickable above CRT overlay */
+            z-index: 10; 
         }
 
-        a:hover {
-            color: var(--green);
-            text-decoration-style: solid;
-        }
+        a:hover { color: var(--green); text-decoration-style: solid; }
 
         .cursor {
             display: inline-block;
@@ -370,6 +333,55 @@
         @keyframes blink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
+        }
+
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 768px) {
+            body { align-items: flex-start; }
+            
+            .window { 
+                height: 90vh; 
+                margin-top: 35px; 
+                border-radius: 6px; 
+                width: 95%;
+            }
+            
+            .terminal-body { 
+                padding: 15px; 
+                font-size: 13px; 
+            }
+            
+            /* Safely scale down the 3D ASCII art to prevent container blowout */
+            .ascii-container { 
+                transform: scale(0.45); 
+                margin: -35px 0 -25px 0; 
+            }
+            
+            /* Streamline Window Chrome */
+            .tab { min-width: 120px; font-size: 12px; padding: 0 10px; }
+            .tab-add, .window-controls { display: none; }
+            
+            /* Break Table Layout for Mobile */
+            .file-list { display: block; }
+            .file-row { 
+                display: flex; 
+                flex-direction: column; 
+                margin-bottom: 15px; 
+                border-left: 2px solid var(--surface1); 
+                padding-left: 10px; 
+            }
+            .file-row > div { display: block; padding: 2px 0; }
+            .file-date { font-size: 12px; color: var(--subtext0); }
+            
+            /* Compact Desktop Bar */
+            .desktop-bar { padding: 0 10px; font-size: 11px; }
+        }
+
+        /* For very small devices like older iPhones */
+        @media (max-width: 480px) {
+            .ascii-container { transform: scale(0.35); margin: -55px 0 -45px 0; }
+            .desktop-bar .left { display: none; } /* Center clock becomes priority */
+            .desktop-bar .right span:first-child { display: none; } /* Hide Wi-Fi text */
         }
     </style>
 </head>
@@ -528,7 +540,7 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Generate local login time snippet completely locally, keeping privacy intact
+    // Generate local login time snippet completely locally
     const loginStr = new Date().toString().slice(0, 24);
     document.getElementById('login-time').textContent = `Last login: ${loginStr}`;
 
@@ -536,7 +548,6 @@
     const artContainer = document.getElementById('name-art');
     const chars = " .,-~:;=!*#$@"; // Shading characters
     
-    // Perfectly centered template array mapping
     const template = [
         "         @@@@@@   @@@@@@@@@@@@@@@@@@   @@@@@@   @@@@@@   @@@@           ",
         "        @@@@@@@@  @@@@@@@@@@@@@@@@@@  @@@@@@@@  @@@@@@@  @@@@           ",
