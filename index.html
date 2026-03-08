@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aman Rajesh</title>
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a6e3a1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='4 17 10 11 4 5'></polyline><line x1='12' y1='19' x2='20' y2='19'></line></svg>">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Catppuccin Mocha Palette */
+            --crust: #11111b;
+            --mantle: #181825;
+            --base: #1e1e2e;
+            --surface0: #313244;
+            --surface1: #45475a;
+            --surface2: #585b70;
+            --text: #cdd6f4;
+            --subtext0: #a6adc8;
+            --green: #a6e3a1;
+            --blue: #89b4fa;
+            --yellow: #f9e2af;
+            --mauve: #cba6f7;
+            --red: #f38ba8;
+            --peach: #fab387;
+            --lavender: #b4befe;
+            
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        html, body {
+            background-color: var(--crust);
+            color: var(--text);
+            font-family: var(--font-mono);
+            font-variant-ligatures: contextual;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden; /* Prevents the whole page from scrolling */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            /* Minimal Desktop Environment Background */
+            background-image: 
+                radial-gradient(ellipse at 50% 50%, rgba(203, 166, 247, 0.03) 0%, transparent 60%),
+                linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+            background-size: 100% 100%, 30px 30px, 30px 30px;
+            background-position: center center;
+        }
+
+        /* Minimal Desktop Status Bar */
+        .desktop-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 28px;
+            background-color: rgba(17, 17, 27, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 12px;
+            color: var(--subtext0);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            user-select: none;
+        }
+
+        .desktop-bar .left { display: flex; gap: 15px; }
+        .desktop-bar .center { color: var(--text); font-weight: bold; }
+        .desktop-bar .right { display: flex; gap: 15px; }
+
+        /* Windows Terminal Frame */
+        .window {
+            background-color: var(--base);
+            width: 100%;
+            max-width: 950px;
+            border-radius: 8px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 1px var(--surface1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 85vh; /* Fixed height relative to viewport */
+            position: relative; /* Needed for CRT overlay */
+            margin-top: 20px; /* Offset to account for the top bar visually */
+        }
+
+        /* --- CRT RETRO EFFECT OVERLAY --- */
+        .window::after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            /* Scanlines and RGB sub-pixel mimicry */
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 3px, 3px 100%;
+            z-index: 100;
+            pointer-events: none; /* Allows you to click the links beneath the overlay */
+            box-shadow: inset 0 0 70px rgba(0,0,0,0.4); /* Screen Vignette */
+            border-radius: 8px;
+        }
+
+        /* Windows Terminal Title Bar */
+        .title-bar {
+            background-color: var(--crust);
+            height: 42px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            user-select: none;
+            padding-top: 5px;
+            z-index: 10;
+        }
+
+        .tabs-container {
+            display: flex;
+            height: 35px;
+            margin-left: 10px;
+            align-items: flex-end;
+        }
+
+        .tab {
+            background-color: var(--base);
+            color: var(--text);
+            padding: 0 15px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            min-width: 180px;
+            height: 100%;
+            position: relative;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+        }
+
+        /* Active tab accent line */
+        .tab::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--blue);
+        }
+
+        .tab-icon {
+            color: var(--peach);
+            font-weight: bold;
+        }
+
+        .tab-close {
+            margin-left: auto;
+            color: var(--subtext0);
+            font-size: 16px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            line-height: 1;
+        }
+
+        .tab-close:hover {
+            background-color: var(--surface0);
+            color: var(--text);
+        }
+
+        .tab-add {
+            color: var(--subtext0);
+            padding: 0 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            height: 30px;
+            margin-bottom: 2px;
+            border-radius: 6px;
+        }
+
+        .tab-add:hover {
+            background-color: var(--surface0);
+            color: var(--text);
+        }
+
+        .window-controls {
+            display: flex;
+            height: 100%;
+            align-items: flex-start;
+        }
+
+        .control-btn {
+            width: 46px;
+            height: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--subtext0);
+            cursor: pointer;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 12px;
+            transition: 0.1s;
+        }
+
+        .control-btn:hover { background-color: var(--surface0); color: var(--text); }
+        .control-btn.close:hover { background-color: #e81123; color: white; }
+
+        /* Terminal Body */
+        .terminal-body {
+            padding: 25px 35px;
+            overflow-y: auto; /* Only the terminal content scrolls */
+            flex-grow: 1;
+        }
+
+        .terminal-body::-webkit-scrollbar {
+            width: 12px;
+        }
+        .terminal-body::-webkit-scrollbar-track {
+            background: var(--base);
+        }
+        .terminal-body::-webkit-scrollbar-thumb {
+            background: var(--surface1);
+            border-radius: 6px;
+            border: 3px solid var(--base);
+        }
+        .terminal-body::-webkit-scrollbar-thumb:hover {
+            background: var(--surface2);
+        }
+
+        /* Animated ASCII Name Container */
+        .ascii-container {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0 30px 0;
+            perspective: 800px; /* Gives the 3D depth effect */
+        }
+
+        #name-art {
+            color: var(--mauve);
+            white-space: pre;
+            font-size: 11px;
+            line-height: 1.15;
+            font-weight: bold;
+            text-align: left;
+            user-select: none;
+            text-shadow: 0 0 8px rgba(203, 166, 247, 0.4);
+        }
+
+        /* Terminal Content Styling */
+        .prompt-line {
+            margin-top: 25px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        /* Refined, subtle text-shadow for terminal shine effect */
+        .user { color: var(--green); font-weight: bold; text-shadow: 0 0 2px rgba(166, 227, 161, 0.6); }
+        .colon { color: var(--text); }
+        .dir { color: var(--blue); font-weight: bold; margin-right: 10px; text-shadow: 0 0 2px rgba(137, 180, 250, 0.6); }
+        .command { color: var(--yellow); font-weight: bold; text-shadow: 0 0 2px rgba(249, 226, 175, 0.6); }
+
+        .output {
+            margin-left: 10px;
+            margin-bottom: 20px;
+        }
+
+        .output-block {
+            margin-bottom: 25px;
+            border-left: 2px solid var(--surface1);
+            padding-left: 15px;
+        }
+
+        .title {
+            color: var(--lavender);
+            font-weight: bold;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .subtitle {
+            color: var(--subtext0);
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        /* SVG AMD Logo with Catppuccin Green mask */
+        .amd-logo {
+            display: inline-block;
+            width: 48px;
+            height: 16px;
+            background-color: var(--green);
+            -webkit-mask: url('https://upload.wikimedia.org/wikipedia/commons/7/7c/AMD_Logo.svg') no-repeat center / contain;
+            mask: url('https://upload.wikimedia.org/wikipedia/commons/7/7c/AMD_Logo.svg') no-repeat center / contain;
+        }
+
+        .file-list {
+            display: table;
+            width: 100%;
+        }
+
+        .file-row {
+            display: table-row;
+        }
+
+        .file-row > div {
+            display: table-cell;
+            padding: 6px 15px 6px 0;
+            vertical-align: top;
+        }
+
+        .file-date { color: var(--subtext0); white-space: nowrap; }
+        .file-name { color: var(--blue); font-weight: bold; white-space: nowrap; }
+        .file-desc { color: var(--text); }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill {
+            background: var(--surface0);
+            color: var(--text);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            border: 1px solid var(--surface1);
+        }
+
+        a {
+            color: var(--blue);
+            text-decoration: underline;
+            text-decoration-style: dashed;
+            text-underline-offset: 4px;
+            position: relative;
+            z-index: 10; /* Keep links clickable above CRT overlay */
+        }
+
+        a:hover {
+            color: var(--green);
+            text-decoration-style: solid;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 18px;
+            background-color: var(--text);
+            vertical-align: middle;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="desktop-bar">
+    <div class="left">
+        <span>AmanRV Workspace</span>
+    </div>
+    <div class="center" id="live-clock">
+        ...
+    </div>
+    <div class="right">
+        <span>[Wi-Fi]</span>
+        <span>[100% 🔋]</span>
+    </div>
+</div>
+
+<div class="window">
+    
+    <div class="title-bar">
+        <div class="tabs-container">
+            <div class="tab">
+                <span class="tab-icon">❯_</span> aman@rajesh: ~
+                <span class="tab-close">×</span>
+            </div>
+            <div class="tab-add">+</div>
+        </div>
+        <div class="window-controls">
+            <div class="control-btn">─</div>
+            <div class="control-btn">□</div>
+            <div class="control-btn close">✕</div>
+        </div>
+    </div>
+
+    <div class="terminal-body">
+        
+        <div class="prompt-line" style="margin-top: 0;">
+            <span class="user">aman@rajesh</span><span class="colon">:</span><span class="dir">~</span> <span class="command">./load_profile.sh</span>
+        </div>
+
+        <div class="ascii-container">
+            <pre id="name-art"></pre>
+        </div>
+
+        <div class="output">
+            Loading system profile... Done.<br>
+            Welcome to Aman's page. <span id="login-time"></span>
+        </div>
+
+        <div class="prompt-line">
+            <span class="user">aman@rajesh</span><span class="colon">:</span><span class="dir">~</span> <span class="command">whoami</span>
+        </div>
+        <div class="output">
+            Aman Rajesh<br>
+            Graduate Hardware Intern @ AMD (Austin, TX 🇺🇸)<br>
+            BEng Computer Engineering @ McMaster University (Hamilton, ON 🇨🇦)<br>
+        </div>
+
+        <div class="prompt-line">
+            <span class="user">aman@rajesh</span><span class="colon">:</span><span class="dir">~</span> <span class="command">cat experience.log</span>
+        </div>
+        <div class="output">
+            <div class="output-block">
+                <div class="title"><span class="amd-logo" title="AMD"></span></div>
+                <div class="subtitle">Graduate Hardware Intern | Austin, TX | Feb 2026 - Aug 2026</div>
+                Currently undertaking a 6-month hardware engineering internship at the Austin campus, contributing to memory overclocking and I/O performance on AMD systems.
+            </div>
+            
+            <div class="output-block">
+                <div class="title"><span class="amd-logo" title="AMD"></span></div>
+                <div class="subtitle">Power Test Engineering Intern | Markham, ON | May 2025 - Dec 2025</div>
+                Performed power characterization on Ryzen CPUs to validate power-saving algorithms. Developed automated tools to accelerate hardware debugging and system analysis.
+            </div>
+
+            <div class="output-block">
+                <div class="title">McMaster Formula Electric (FSAE)</div>
+                <div class="subtitle">Firmware Team Member | Hamilton, ON | Sept 2024 - Jun 2025</div>
+                Built a real-time embedded dashboard and designed state machines to dynamically manage race car telemetry and behavior.
+            </div>
+
+            <div class="output-block">
+                <div class="title">McMaster Chem-E-Car</div>
+                <div class="subtitle">Circuitry Team Member | Hamilton, ON | Oct 2023 - May 2024</div>
+                Developed modular control functions and implemented closed-loop systems to enhance autonomous driving accuracy.
+            </div>
+        </div>
+
+        <div class="prompt-line">
+            <span class="user">aman@rajesh</span><span class="colon">:</span><span class="dir">~/projects</span> <span class="command">ls -la</span>
+        </div>
+        <div class="output">
+            <div class="file-list">
+                <div class="file-row">
+                    <div class="file-date">Oct 2024</div>
+                    <div class="file-name">sdr.exe</div>
+                    <div class="file-desc">Designed a real-time software defined radio featuring audio processing and station data decoding.</div>
+                </div>
+                <div class="file-row">
+                    <div class="file-date">Nov 2023</div>
+                    <div class="file-name"><a href="https://github.com/AmanRV/STMScope" target="_blank">stmscope.bin</a></div>
+                    <div class="file-desc">Developed a digital oscilloscope using an STM32 microcontroller with high-speed data sampling.</div>
+                </div>
+                <div class="file-row">
+                    <div class="file-date">Dec 2023</div>
+                    <div class="file-name">decompressor.sv</div>
+                    <div class="file-desc">Implemented a hardware image decompression algorithm on an FPGA using SystemVerilog.</div>
+                </div>
+                <div class="file-row">
+                    <div class="file-date">Jan 2024</div>
+                    <div class="file-name"><a href="https://github.com/AmanRV/Micro-LiDAR" target="_blank">micro-lidar.py</a></div>
+                    <div class="file-desc">Created a 3D spatial mapping system to recreate a 360-degree view of indoor environments.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="prompt-line">
+            <span class="user">aman@rajesh</span><span class="colon">:</span><span class="dir">~</span> <span class="command">echo $SKILLS</span>
+        </div>
+        <div class="output">
+            <div class="skills-grid">
+                <span class="skill">C/C++</span>
+                <span class="skill">Python</span>
+                <span class="skill">SystemVerilog</span>
+                <span class="skill">ARM Assembly</span>
+                <span class="skill">FPGA</span>
+                <span class="skill">STM32</span>
+                <span class="skill">ModelSim</span>
+                <span class="skill">Linux</span>
+            </div>
+        </div>
+
+        <div class="prompt-line">
+            <span class="user">aman@rajesh</span><span class="colon">:</span><span class="dir">~</span> <span class="command">cat contact.txt</span>
+        </div>
+        <div class="output">
+            Email: <a href="mailto:rajesa2@mcmaster.ca">rajesa2@mcmaster.ca</a><br>
+            LinkedIn: <a href="https://linkedin.com/in/aman-rajesh" target="_blank">linkedin.com/in/aman-rajesh</a><br>
+            GitHub: <a href="https://github.com/AmanRV" target="_blank">github.com/AmanRV</a>
+        </div>
+
+        <div class="prompt-line">
+            <span class="user">aman@rajesh</span><span class="colon">:</span><span class="dir">~</span> <span class="cursor"></span>
+        </div>
+        <br><br>
+    </div>
+</div>
+
+<script>
+    // System Local Time Scripts
+    function updateClock() {
+        const now = new Date();
+        const options = { weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+        document.getElementById('live-clock').textContent = now.toLocaleDateString('en-US', options).replace(',', '');
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Generate local login time snippet completely locally, keeping privacy intact
+    const loginStr = new Date().toString().slice(0, 24);
+    document.getElementById('login-time').textContent = `Last login: ${loginStr}`;
+
+    // 3D Animated ASCII Text Engine
+    const artContainer = document.getElementById('name-art');
+    const chars = " .,-~:;=!*#$@"; // Shading characters
+    
+    // Perfectly centered template array mapping
+    const template = [
+        "         @@@@@@   @@@@@@@@@@@@@@@@@@   @@@@@@   @@@@@@   @@@@           ",
+        "        @@@@@@@@  @@@@@@@@@@@@@@@@@@  @@@@@@@@  @@@@@@@  @@@@           ",
+        "        @@@  @@@  @@@@@@@@@@@@@@@@@@  @@@  @@@  @@@@@@@@ @@@@           ",
+        "        @@@@@@@@  @@@@@  @@@@  @@@@@  @@@@@@@@  @@@@ @@@@@@@@           ",
+        "        @@@@@@@@  @@@@@  @@@@  @@@@@  @@@@@@@@  @@@@  @@@@@@@           ",
+        "        @@@  @@@  @@@@@  @@@@  @@@@@  @@@  @@@  @@@@   @@@@@@           ",
+        "        @@@  @@@  @@@@@  @@@@  @@@@@  @@@  @@@  @@@@    @@@@@           ",
+        "                                                                        ",
+        "   @@@@@@@@    @@@@@@      @@@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@  @@@@    ",
+        "   @@@@@@@@@  @@@@@@@@           @@@  @@@@@@@@  @@@@@@@@  @@@@  @@@@    ",
+        "   @@@   @@@  @@@  @@@           @@@  @@@       @@@       @@@@  @@@@    ",
+        "   @@@@@@@@   @@@@@@@@           @@@  @@@@@@@   @@@@@@@   @@@@@@@@@@    ",
+        "   @@@@@@@    @@@@@@@@   @@@     @@@  @@@@@@@   @@@@@@@   @@@@@@@@@@    ",
+        "   @@@  @@@@  @@@  @@@   @@@@   @@@@  @@@             @@@ @@@@  @@@@    ",
+        "   @@@   @@@  @@@  @@@    @@@@@@@@@   @@@@@@@@  @@@@@@@@  @@@@  @@@@    "
+    ];
+
+    let time = 0;
+
+    function renderAscii3D() {
+        let output = "";
+        
+        time += 0.04; 
+
+        const height = template.length;
+        const width = Math.max(...template.map(row => row.length));
+        
+        const cx = width / 2;
+        const cy = height / 2;
+
+        for (let y = 0; y < height; y++) {
+            for (let x = 0; x < width; x++) {
+                if (template[y][x] === undefined || template[y][x] === " ") {
+                    output += " ";
+                } else {
+                    let dist = Math.sqrt((x - cx)*(x - cx) + (y - cy)*(y - cy)*4);
+                    let noise = Math.sin(dist * 0.2 - time * 2) + Math.cos(x * 0.1 + time);
+                    
+                    let index = Math.floor(((noise + 2) / 4) * chars.length);
+                    index = Math.max(0, Math.min(chars.length - 1, index));
+                    
+                    output += chars[index];
+                }
+            }
+            output += "\n";
+        }
+        
+        artContainer.innerHTML = output;
+        
+        let rotY = Math.sin(time * 0.3) * 12; 
+        let rotX = Math.cos(time * 0.2) * 6;  
+        
+        artContainer.style.transform = `rotateY(${rotY}deg) rotateX(${rotX}deg)`;
+        
+        requestAnimationFrame(renderAscii3D);
+    }
+    
+    // Start engine
+    renderAscii3D();
+</script>
+
+</body>
+</html>
