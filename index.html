@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aman Rajesh</title>
     
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a6e3a1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='4 17 10 11 4 5'></polyline><line x1='12' y1='19' x2='20' y2='19'></line></svg>">
     
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,400&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             /* Catppuccin Mocha Palette */
@@ -28,306 +29,205 @@
             --lavender: #b4befe;
             
             --font-mono: 'Fira Code', monospace;
+            --font-sans: 'Nunito Sans', sans-serif;
         }
 
-        html, body {
-            background-color: var(--crust);
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--base);
             color: var(--text);
-            font-family: var(--font-mono);
-            font-variant-ligatures: contextual;
-            font-size: 14px;
-            line-height: 1.6;
+            font-family: var(--font-sans);
+            font-size: 13px; /* Smaller base font for compact layout */
+            line-height: 1.5;
             margin: 0;
-            padding: 0;
+            padding: 40px 50px; /* Top-left alignment positioning */
             height: 100vh;
             width: 100vw;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            
-            /* Minimal Desktop Environment Background */
-            background-image: 
-                radial-gradient(ellipse at 50% 50%, rgba(203, 166, 247, 0.03) 0%, transparent 60%),
-                linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
-            background-size: 100% 100%, 30px 30px, 30px 30px;
-            background-position: center center;
+            overflow: hidden; /* Prevents scrolling */
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Minimal Desktop Status Bar */
-        .desktop-bar {
-            position: absolute;
+        /* Ambient ASCII Fluid Background */
+        #bg-ascii {
+            position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            height: 28px;
-            background-color: rgba(17, 17, 27, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            font-size: 12px;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            margin: 0;
             color: var(--subtext0);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
-            user-select: none;
-        }
-
-        .desktop-bar .left { display: flex; gap: 15px; }
-        .desktop-bar .center { color: var(--text); font-weight: bold; }
-        .desktop-bar .right { display: flex; gap: 15px; }
-
-        /* Windows Terminal Frame */
-        .window {
-            background-color: var(--base);
-            width: 100%;
-            max-width: 950px;
-            border-radius: 8px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 1px var(--surface1);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            height: 85vh; 
-            position: relative; 
-            margin-top: 20px; 
-        }
-
-        /* --- CRT RETRO EFFECT OVERLAY --- */
-        .window::after {
-            content: " ";
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%), 
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-            background-size: 100% 3px, 3px 100%;
-            z-index: 100;
-            pointer-events: none; 
-            box-shadow: inset 0 0 70px rgba(0,0,0,0.4); 
-            border-radius: 8px;
-        }
-
-        /* Windows Terminal Title Bar */
-        .title-bar {
-            background-color: var(--crust);
-            height: 42px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            user-select: none;
-            padding-top: 5px;
-            z-index: 10;
-        }
-
-        .tabs-container {
-            display: flex;
-            height: 35px;
-            margin-left: 10px;
-            align-items: flex-end;
-        }
-
-        .tab {
-            background-color: var(--base);
-            color: var(--text);
-            padding: 0 15px;
-            border-radius: 8px 8px 0 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 13px;
-            min-width: 180px;
-            height: 100%;
-            position: relative;
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
-        }
-
-        .tab::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background-color: var(--blue);
-        }
-
-        .tab-icon {
-            color: var(--peach);
-            font-weight: bold;
-        }
-
-        .tab-close {
-            margin-left: auto;
-            color: var(--subtext0);
-            font-size: 16px;
-            padding: 2px 6px;
-            border-radius: 4px;
-            line-height: 1;
-        }
-
-        .tab-close:hover {
-            background-color: var(--surface0);
-            color: var(--text);
-        }
-
-        .tab-add {
-            color: var(--subtext0);
-            padding: 0 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 18px;
-            height: 30px;
-            margin-bottom: 2px;
-            border-radius: 6px;
-        }
-
-        .tab-add:hover {
-            background-color: var(--surface0);
-            color: var(--text);
-        }
-
-        .window-controls {
-            display: flex;
-            height: 100%;
-            align-items: flex-start;
-        }
-
-        .control-btn {
-            width: 46px;
-            height: 32px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--subtext0);
-            cursor: pointer;
-            font-family: 'Segoe UI', sans-serif;
-            font-size: 12px;
-            transition: 0.1s;
-        }
-
-        .control-btn:hover { background-color: var(--surface0); color: var(--text); }
-        .control-btn.close:hover { background-color: #e81123; color: white; }
-
-        /* Terminal Body */
-        .terminal-body {
-            padding: 25px 35px;
-            overflow-y: auto; 
-            flex-grow: 1;
-        }
-
-        .terminal-body::-webkit-scrollbar { width: 12px; }
-        .terminal-body::-webkit-scrollbar-track { background: var(--base); }
-        .terminal-body::-webkit-scrollbar-thumb {
-            background: var(--surface1);
-            border-radius: 6px;
-            border: 3px solid var(--base);
-        }
-        .terminal-body::-webkit-scrollbar-thumb:hover { background: var(--surface2); }
-
-        /* Animated ASCII Name Container */
-        .ascii-container {
-            display: flex;
-            justify-content: center;
-            margin: 10px 0 30px 0;
-            perspective: 800px;
-        }
-
-        #name-art {
-            color: var(--mauve);
+            opacity: 0.05; /* Slightly more opaque */
+            font-family: var(--font-mono); 
+            font-size: 12px; 
+            line-height: 12px;
+            letter-spacing: 4px; 
+            font-weight: 600;
             white-space: pre;
-            font-size: 11px;
-            line-height: 1.15;
-            font-weight: bold;
-            text-align: left;
             user-select: none;
-            text-shadow: 0 0 8px rgba(203, 166, 247, 0.4);
+            pointer-events: none;
+            overflow: hidden;
         }
 
-        /* Terminal Content Styling */
-        .prompt-line {
-            margin-top: 25px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
+        main {
+            width: 100%;
+            max-width: 900px;
+            animation: fadeIn 0.8s ease-out;
+            position: relative;
+            z-index: 1;
         }
 
-        .user { color: var(--green); font-weight: bold; text-shadow: 0 0 2px rgba(166, 227, 161, 0.6); }
-        .colon { color: var(--text); }
-        .dir { color: var(--blue); font-weight: bold; margin-right: 10px; text-shadow: 0 0 2px rgba(137, 180, 250, 0.6); }
-        .command { color: var(--yellow); font-weight: bold; text-shadow: 0 0 2px rgba(249, 226, 175, 0.6); }
-
-        .output { margin-left: 10px; margin-bottom: 20px; }
-
-        .output-block {
-            margin-bottom: 25px;
-            border-left: 2px solid var(--surface1);
-            padding-left: 15px;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .title {
-            color: var(--lavender);
-            font-weight: bold;
-            font-size: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        /* Two-column layout to fit everything on screen */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
         }
 
-        .subtitle { color: var(--subtext0); font-size: 13px; margin-bottom: 8px; }
-
-        .amd-logo {
-            display: inline-block;
-            width: 48px;
-            height: 16px;
-            background-color: var(--green);
-            -webkit-mask: url('https://upload.wikimedia.org/wikipedia/commons/7/7c/AMD_Logo.svg') no-repeat center / contain;
-            mask: url('https://upload.wikimedia.org/wikipedia/commons/7/7c/AMD_Logo.svg') no-repeat center / contain;
+        /* Typography */
+        h1 {
+            color: var(--mauve);
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin: 0 0 5px 0;
+            letter-spacing: -0.5px;
         }
 
-        .file-list { display: table; width: 100%; }
-        .file-row { display: table-row; }
-        .file-row > div { display: table-cell; padding: 6px 15px 6px 0; vertical-align: top; }
-        .file-date { color: var(--subtext0); white-space: nowrap; }
-        .file-name { color: var(--blue); font-weight: bold; white-space: nowrap; }
-        .file-desc { color: var(--text); }
-
-        .skills-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-        .skill {
-            background: var(--surface0);
+        h2 {
             color: var(--text);
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-size: 13px;
-            border: 1px solid var(--surface1);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 20px 0 15px 0;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px dashed var(--surface1);
+            padding-bottom: 6px;
+            letter-spacing: -0.2px;
         }
 
+        h2 .accent {
+            font-family: var(--font-mono);
+            color: var(--green);
+            margin-right: 8px;
+            font-size: 0.95rem;
+        }
+
+        .bio {
+            color: var(--subtext0);
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .bio-highlight {
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        /* Links */
         a {
             color: var(--blue);
-            text-decoration: underline;
-            text-decoration-style: dashed;
-            text-underline-offset: 4px;
-            position: relative;
-            z-index: 10; 
+            text-decoration: none;
+            border-bottom: 1px dashed var(--surface1);
+            transition: all 0.2s ease;
+            padding-bottom: 1px;
         }
 
-        a:hover { color: var(--green); text-decoration-style: solid; }
+        a:hover {
+            color: var(--green);
+            border-bottom-color: var(--green);
+            border-bottom-style: solid;
+        }
 
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Experience Blocks */
+        .block {
+            margin-bottom: 12px;
+            border-left: 2px solid var(--surface1);
+            padding-left: 12px;
+            transition: border-color 0.3s;
+        }
+
+        .block:hover {
+            border-left-color: var(--blue);
+        }
+
+        .block-title {
+            color: var(--lavender);
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 2px;
+        }
+
+        .block-meta {
+            color: var(--subtext0);
+            font-size: 0.8rem;
+        }
+
+        /* Project List */
+        .project-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .project {
+            display: flex;
+            flex-direction: column;
+            background: rgba(24, 24, 37, 0.7);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            padding: 10px 15px;
+            border-radius: 6px;
+            border: 1px solid var(--surface0);
+            transition: all 0.2s ease;
+        }
+
+        .project:hover {
+            border-color: var(--blue);
+            background: rgba(49, 50, 68, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-name a {
+            font-weight: 700;
+            font-size: 0.95rem;
+            border: none;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .project-date {
+            color: var(--subtext0);
+            font-size: 0.75rem;
+            font-family: var(--font-mono);
+        }
+
+        /* Blinking Cursor */
         .cursor {
             display: inline-block;
-            width: 10px;
-            height: 18px;
+            width: 8px;
+            height: 14px;
             background-color: var(--text);
             vertical-align: middle;
             animation: blink 1s step-end infinite;
+            margin-top: 20px;
         }
 
         @keyframes blink {
@@ -335,279 +235,143 @@
             50% { opacity: 0; }
         }
 
-        /* --- MOBILE RESPONSIVENESS --- */
+        /* Mobile Adjustments */
         @media (max-width: 768px) {
-            body { align-items: flex-start; }
-            
-            .window { 
-                height: 90vh; 
-                margin-top: 35px; 
-                border-radius: 6px; 
-                width: 95%;
-            }
-            
-            .terminal-body { 
-                padding: 15px; 
-                font-size: 13px; 
-            }
-            
-            /* Safely scale down the 3D ASCII art to prevent container blowout */
-            .ascii-container { 
-                transform: scale(0.45); 
-                margin: -35px 0 -25px 0; 
-            }
-            
-            /* Streamline Window Chrome */
-            .tab { min-width: 120px; font-size: 12px; padding: 0 10px; }
-            .tab-add, .window-controls { display: none; }
-            
-            /* Break Table Layout for Mobile */
-            .file-list { display: block; }
-            .file-row { 
-                display: flex; 
-                flex-direction: column; 
-                margin-bottom: 15px; 
-                border-left: 2px solid var(--surface1); 
-                padding-left: 10px; 
-            }
-            .file-row > div { display: block; padding: 2px 0; }
-            .file-date { font-size: 12px; color: var(--subtext0); }
-            
-            /* Compact Desktop Bar */
-            .desktop-bar { padding: 0 10px; font-size: 11px; }
-        }
-
-        /* For very small devices like older iPhones */
-        @media (max-width: 480px) {
-            .ascii-container { transform: scale(0.35); margin: -55px 0 -45px 0; }
-            .desktop-bar .left { display: none; } /* Center clock becomes priority */
-            .desktop-bar .right span:first-child { display: none; } /* Hide Wi-Fi text */
+            body { padding: 30px; overflow-y: auto; height: auto; }
+            .content-grid { grid-template-columns: 1fr; gap: 10px; }
+            h1 { font-size: 1.6rem; }
         }
     </style>
 </head>
 <body>
 
-<div class="desktop-bar">
-    <div class="left">
-        <span>AmanRV Workspace</span>
-    </div>
-    <div class="center" id="live-clock">
-        ...
-    </div>
-    <div class="right">
-        <span>[Wi-Fi]</span>
-        <span>[100% 🔋]</span>
-    </div>
-</div>
+<pre id="bg-ascii"></pre>
 
-<div class="window">
-    
-    <div class="title-bar">
-        <div class="tabs-container">
-            <div class="tab">
-                <span class="tab-icon">❯_</span> aman@rajesh: ~
-                <span class="tab-close">×</span>
-            </div>
-            <div class="tab-add">+</div>
+<main>
+    <header>
+        <h1>Aman Rajesh</h1>
+        <div class="bio">
+            <span class="bio-highlight">Graduate Hardware Intern @ AMD</span> (Austin, TX 🇺🇸)<br>
+            BEng Computer Engineering @ McMaster University (Hamilton, ON 🇨🇦)
         </div>
-        <div class="window-controls">
-            <div class="control-btn">─</div>
-            <div class="control-btn">□</div>
-            <div class="control-btn close">✕</div>
-        </div>
-    </div>
-
-    <div class="terminal-body">
         
-        <div class="prompt-line" style="margin-top: 0;">
-            <span class="user">aman@rajesh</span><span class="colon">:</span><span class="dir">~</span> <span class="command">./load_profile.sh</span>
+        <div class="social-links">
+            <a href="mailto:rajesa2@mcmaster.ca">Email</a>
+            <a href="https://linkedin.com/in/aman-rajesh" target="_blank">LinkedIn</a>
+            <a href="https://github.com/AmanRV" target="_blank">GitHub</a>
         </div>
+    </header>
 
-        <div class="ascii-container">
-            <pre id="name-art"></pre>
-        </div>
-
-        <div class="output">
-            Loading system profile... Done.<br>
-            Welcome to Aman's page. <span id="login-time"></span>
-        </div>
-
-        <div class="prompt-line">
-            <span class="user">aman@rajesh</span><span class="colon">:</span><span class="dir">~</span> <span class="command">whoami</span>
-        </div>
-        <div class="output">
-            Aman Rajesh<br>
-            Graduate Hardware Intern @ AMD (Austin, TX 🇺🇸)<br>
-            BEng Computer Engineering @ McMaster University (Hamilton, ON 🇨🇦)<br>
-        </div>
-
-        <div class="prompt-line">
-            <span class="user">aman@rajesh</span><span class="colon">:</span><span class="dir">~</span> <span class="command">cat experience.log</span>
-        </div>
-        <div class="output">
-            <div class="output-block">
-                <div class="title"><span class="amd-logo" title="AMD"></span></div>
-                <div class="subtitle">Graduate Hardware Intern | Austin, TX | Feb 2026 - Aug 2026</div>
-                Currently undertaking a 6-month hardware engineering internship at the Austin campus, contributing to memory overclocking and I/O performance on AMD systems.
-            </div>
+    <div class="content-grid">
+        <section id="experience">
+            <h2><span class="accent">~/</span>experience</h2>
             
-            <div class="output-block">
-                <div class="title"><span class="amd-logo" title="AMD"></span></div>
-                <div class="subtitle">Power Test Engineering Intern | Markham, ON | May 2025 - Dec 2025</div>
-                Performed power characterization on Ryzen CPUs to validate power-saving algorithms. Developed automated tools to accelerate hardware debugging and system analysis.
+            <div class="block">
+                <div class="block-title">AMD</div>
+                <div class="block-meta">Graduate Hardware Intern | Austin, TX | Feb 2026 - Aug 2026</div>
             </div>
 
-            <div class="output-block">
-                <div class="title">McMaster Formula Electric (FSAE)</div>
-                <div class="subtitle">Firmware Team Member | Hamilton, ON | Sept 2024 - Jun 2025</div>
-                Built a real-time embedded dashboard and designed state machines to dynamically manage race car telemetry and behavior.
+            <div class="block">
+                <div class="block-title">AMD</div>
+                <div class="block-meta">Power Test Engineering Intern | Markham, ON | May 2025 - Dec 2025</div>
             </div>
 
-            <div class="output-block">
-                <div class="title">McMaster Chem-E-Car</div>
-                <div class="subtitle">Circuitry Team Member | Hamilton, ON | Oct 2023 - May 2024</div>
-                Developed modular control functions and implemented closed-loop systems to enhance autonomous driving accuracy.
+            <div class="block">
+                <div class="block-title">McMaster Formula Electric (FSAE)</div>
+                <div class="block-meta">Firmware Team Member | Hamilton, ON | Sept 2024 - Jun 2025</div>
             </div>
-        </div>
 
-        <div class="prompt-line">
-            <span class="user">aman@rajesh</span><span class="colon">:</span><span class="dir">~/projects</span> <span class="command">ls -la</span>
-        </div>
-        <div class="output">
-            <div class="file-list">
-                <div class="file-row">
-                    <div class="file-date">Oct 2024</div>
-                    <div class="file-name">sdr.exe</div>
-                    <div class="file-desc">Designed a real-time software defined radio featuring audio processing and station data decoding.</div>
+            <div class="block">
+                <div class="block-title">McMaster Chem-E-Car</div>
+                <div class="block-meta">Circuitry Team Member | Hamilton, ON | Oct 2023 - May 2024</div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2><span class="accent">~/</span>projects</h2>
+            
+            <div class="project-list">
+                <div class="project">
+                    <div class="project-name"><a href="#">sdr.exe</a></div>
+                    <div class="project-date">Oct 2024</div>
                 </div>
-                <div class="file-row">
-                    <div class="file-date">Nov 2023</div>
-                    <div class="file-name"><a href="https://github.com/AmanRV/STMScope" target="_blank">stmscope.bin</a></div>
-                    <div class="file-desc">Developed a digital oscilloscope using an STM32 microcontroller with high-speed data sampling.</div>
+
+                <div class="project">
+                    <div class="project-name"><a href="https://github.com/AmanRV/STMScope" target="_blank">stmscope.bin</a></div>
+                    <div class="project-date">Nov 2023</div>
                 </div>
-                <div class="file-row">
-                    <div class="file-date">Dec 2023</div>
-                    <div class="file-name">decompressor.sv</div>
-                    <div class="file-desc">Implemented a hardware image decompression algorithm on an FPGA using SystemVerilog.</div>
-                </div>
-                <div class="file-row">
-                    <div class="file-date">Jan 2024</div>
-                    <div class="file-name"><a href="https://github.com/AmanRV/Micro-LiDAR" target="_blank">micro-lidar.py</a></div>
-                    <div class="file-desc">Created a 3D spatial mapping system to recreate a 360-degree view of indoor environments.</div>
+
+                <div class="project">
+                    <div class="project-name"><a href="https://github.com/AmanRV/Micro-LiDAR" target="_blank">micro-lidar.py</a></div>
+                    <div class="project-date">Jan 2024</div>
                 </div>
             </div>
-        </div>
-
-        <div class="prompt-line">
-            <span class="user">aman@rajesh</span><span class="colon">:</span><span class="dir">~</span> <span class="command">echo $SKILLS</span>
-        </div>
-        <div class="output">
-            <div class="skills-grid">
-                <span class="skill">C/C++</span>
-                <span class="skill">Python</span>
-                <span class="skill">SystemVerilog</span>
-                <span class="skill">ARM Assembly</span>
-                <span class="skill">FPGA</span>
-                <span class="skill">STM32</span>
-                <span class="skill">ModelSim</span>
-                <span class="skill">Linux</span>
-            </div>
-        </div>
-
-        <div class="prompt-line">
-            <span class="user">aman@rajesh</span><span class="colon">:</span><span class="dir">~</span> <span class="command">cat contact.txt</span>
-        </div>
-        <div class="output">
-            Email: <a href="mailto:rajesa2@mcmaster.ca">rajesa2@mcmaster.ca</a><br>
-            LinkedIn: <a href="https://linkedin.com/in/aman-rajesh" target="_blank">linkedin.com/in/aman-rajesh</a><br>
-            GitHub: <a href="https://github.com/AmanRV" target="_blank">github.com/AmanRV</a>
-        </div>
-
-        <div class="prompt-line">
-            <span class="user">aman@rajesh</span><span class="colon">:</span><span class="dir">~</span> <span class="cursor"></span>
-        </div>
-        <br><br>
+        </section>
     </div>
-</div>
+
+    <div class="cursor"></div>
+</main>
 
 <script>
-    // System Local Time Scripts
-    function updateClock() {
-        const now = new Date();
-        const options = { weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-        document.getElementById('live-clock').textContent = now.toLocaleDateString('en-US', options).replace(',', '');
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
-
-    // Generate local login time snippet completely locally
-    const loginStr = new Date().toString().slice(0, 24);
-    document.getElementById('login-time').textContent = `Last login: ${loginStr}`;
-
-    // 3D Animated ASCII Text Engine
-    const artContainer = document.getElementById('name-art');
-    const chars = " .,-~:;=!*#$@"; // Shading characters
+    // --- Fluid Cellular/Noise ASCII Engine ---
+    const artContainer = document.getElementById('bg-ascii');
     
-    const template = [
-        "         @@@@@@   @@@@@@@@@@@@@@@@@@   @@@@@@   @@@@@@   @@@@           ",
-        "        @@@@@@@@  @@@@@@@@@@@@@@@@@@  @@@@@@@@  @@@@@@@  @@@@           ",
-        "        @@@  @@@  @@@@@@@@@@@@@@@@@@  @@@  @@@  @@@@@@@@ @@@@           ",
-        "        @@@@@@@@  @@@@@  @@@@  @@@@@  @@@@@@@@  @@@@ @@@@@@@@           ",
-        "        @@@@@@@@  @@@@@  @@@@  @@@@@  @@@@@@@@  @@@@  @@@@@@@           ",
-        "        @@@  @@@  @@@@@  @@@@  @@@@@  @@@  @@@  @@@@   @@@@@@           ",
-        "        @@@  @@@  @@@@@  @@@@  @@@@@  @@@  @@@  @@@@    @@@@@           ",
-        "                                                                        ",
-        "   @@@@@@@@    @@@@@@      @@@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@  @@@@    ",
-        "   @@@@@@@@@  @@@@@@@@           @@@  @@@@@@@@  @@@@@@@@  @@@@  @@@@    ",
-        "   @@@   @@@  @@@  @@@           @@@  @@@       @@@       @@@@  @@@@    ",
-        "   @@@@@@@@   @@@@@@@@           @@@  @@@@@@@   @@@@@@@   @@@@@@@@@@    ",
-        "   @@@@@@@    @@@@@@@@   @@@     @@@  @@@@@@@   @@@@@@@   @@@@@@@@@@    ",
-        "   @@@  @@@@  @@@  @@@   @@@@   @@@@  @@@             @@@ @@@@  @@@@    ",
-        "   @@@   @@@  @@@  @@@    @@@@@@@@@   @@@@@@@@  @@@@@@@@  @@@@  @@@@    "
-    ];
-
+    // Character map transitioning from empty space to highly dense varied letters/symbols
+    const chars = "        .,-_~:;!+<>*^?acemnorsuvwxzBDHKMNW0123456789%&#@"; 
+    
     let time = 0;
+    let cols, rows;
 
-    function renderAscii3D() {
+    function resizeGrid() {
+        // Adjust for the letter-spacing and font-size defined in CSS
+        const charWidth = 10; 
+        const charHeight = 12;
+        cols = Math.floor(window.innerWidth / charWidth) + 1;
+        rows = Math.floor(window.innerHeight / charHeight) + 1;
+    }
+
+    window.addEventListener('resize', resizeGrid);
+    resizeGrid();
+
+    function renderNoise() {
         let output = "";
-        
-        time += 0.04; 
+        time += 0.012; // Slow, fluid movement
 
-        const height = template.length;
-        const width = Math.max(...template.map(row => row.length));
-        
-        const cx = width / 2;
-        const cy = height / 2;
+        for (let y = 0; y < rows; y++) {
+            for (let x = 0; x < cols; x++) {
+                
+                // Scale coordinates to stretch the "blobs"
+                let nx = x * 0.06;
+                let ny = y * 0.09;
 
-        for (let y = 0; y < height; y++) {
-            for (let x = 0; x < width; x++) {
-                if (template[y][x] === undefined || template[y][x] === " ") {
-                    output += " ";
-                } else {
-                    let dist = Math.sqrt((x - cx)*(x - cx) + (y - cy)*(y - cy)*4);
-                    let noise = Math.sin(dist * 0.2 - time * 2) + Math.cos(x * 0.1 + time);
-                    
-                    let index = Math.floor(((noise + 2) / 4) * chars.length);
-                    index = Math.max(0, Math.min(chars.length - 1, index));
-                    
-                    output += chars[index];
-                }
+                // Composite sine waves
+                let v1 = Math.sin(nx + time);
+                let v2 = Math.sin(ny - time * 0.8);
+                let v3 = Math.sin(nx + ny + time * 1.2);
+                let v4 = Math.cos(nx * 0.5 - ny * 0.5 - time);
+                
+                let value = v1 + v2 + v3 + v4; 
+                
+                // Normalize value
+                let normalized = (value + 4) / 8;
+                
+                // Smoothstep to sharpen edges
+                normalized = normalized * normalized * (3 - 2 * normalized);
+                
+                let index = Math.floor(normalized * chars.length);
+                index = Math.max(0, Math.min(chars.length - 1, index));
+                
+                output += chars[index];
             }
             output += "\n";
         }
         
-        artContainer.innerHTML = output;
-        
-        let rotY = Math.sin(time * 0.3) * 12; 
-        let rotX = Math.cos(time * 0.2) * 6;  
-        
-        artContainer.style.transform = `rotateY(${rotY}deg) rotateX(${rotX}deg)`;
-        
-        requestAnimationFrame(renderAscii3D);
+        artContainer.textContent = output;
+        requestAnimationFrame(renderNoise);
     }
     
     // Start engine
-    renderAscii3D();
+    renderNoise();
 </script>
 
 </body>
