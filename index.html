@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#0b0b0b">
-  <meta name="color-scheme" content="dark light">
-  <meta name="description" content="Aman Rajesh — APU Validation Intern at AMD and Computer Engineering student at McMaster University.">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Aman Rajesh — Final-year ECE student at McMaster University, graduating April 2027; previously a Hardware Intern at AMD.">
   <title>Aman Rajesh</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,16 +14,6 @@
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230b0b0b'/%3E%3Cpath d='M17 43 29 17h7l12 26h-8l-2.2-5.5H26.5L24.2 43Zm12-12h6.4L32.2 23Z' fill='%23d2d2d2'/%3E%3C/svg%3E">
 
-  <script>
-    (() => {
-      try {
-        const saved = localStorage.getItem('aman-theme');
-        if (saved === 'light' || saved === 'dark') {
-          document.documentElement.dataset.theme = saved;
-        }
-      } catch (_) {}
-    })();
-  </script>
 
   <style>
     :root {
@@ -53,26 +43,6 @@
       --shadow: rgba(0, 0, 0, .28);
     }
 
-    html[data-theme="light"] {
-      --bg: #eeeeeb;
-      --panel: #f2f2ef;
-      --card: #e7e7e4;
-      --card-hover: #dededb;
-      --button: #d7d7d3;
-      --text: #202022;
-      --muted: #616166;
-      --soft: #818186;
-      --faint: #a8a8aa;
-      --line: #d7d7d3;
-      --line-strong: #bdbdb9;
-      --dash: #cfcfcb;
-      --preview-bg: #dededb;
-      --preview-panel: #d3d3d0;
-      --preview-line: #a7a7a4;
-      --preview-strong: #343438;
-      --preview-soft: #76767a;
-      --shadow: rgba(24, 24, 24, .12);
-    }
 
     * {
       box-sizing: border-box;
@@ -289,51 +259,6 @@
       opacity: 1;
     }
 
-    .theme-toggle {
-      position: relative;
-      display: grid;
-      width: 32px;
-      height: 32px;
-      flex: 0 0 auto;
-      place-items: center;
-      padding: 0;
-      border: 0;
-      border-radius: 10px;
-      background: var(--button);
-      color: var(--text);
-      cursor: pointer;
-      transition: background-color 180ms ease, transform 180ms var(--ease);
-    }
-
-    .theme-toggle:hover {
-      transform: translateY(-1px);
-    }
-
-    .theme-toggle:active {
-      transform: translateY(0) scale(.96);
-    }
-
-    .theme-toggle svg {
-      position: absolute;
-      width: 15px;
-      height: 15px;
-      transition: opacity 180ms ease, transform 220ms var(--ease);
-    }
-
-    .theme-toggle .icon-sun {
-      opacity: 0;
-      transform: scale(.65) rotate(-24deg);
-    }
-
-    html[data-theme="light"] .theme-toggle .icon-moon {
-      opacity: 0;
-      transform: scale(.65) rotate(24deg);
-    }
-
-    html[data-theme="light"] .theme-toggle .icon-sun {
-      opacity: 1;
-      transform: scale(1) rotate(0);
-    }
 
     .intro {
       min-height: 368px;
@@ -466,7 +391,7 @@
 
     .entry {
       display: grid;
-      grid-template-columns: 50px auto minmax(30px, 1fr) auto;
+      grid-template-columns: 50px minmax(0, 1fr) auto;
       align-items: center;
       gap: 16px;
       min-width: 0;
@@ -498,160 +423,9 @@
       color: var(--muted);
     }
 
-    .entry-leader {
-      align-self: center;
-      height: 1px;
-      opacity: .85;
-      background-image: linear-gradient(to right, var(--dash) 50%, transparent 50%);
-      background-size: 5px 1px;
-    }
-
-    .projects-section {
-      padding-bottom: 86px;
-    }
-
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .project-card {
-      position: relative;
-      min-width: 0;
-      overflow: hidden;
-      border: 1px solid var(--line-strong);
-      border-radius: 17px;
-      background: var(--card);
-      box-shadow: 0 18px 50px transparent;
-      transition: background-color 220ms ease, border-color 220ms ease, transform 260ms var(--ease), box-shadow 260ms ease;
-    }
-
-    a.project-card:hover {
-      border-color: var(--faint);
-      background: var(--card-hover);
-      box-shadow: 0 18px 50px var(--shadow);
-      transform: translateY(-3px);
-    }
-
-    .project-card--wide {
-      grid-column: 1 / -1;
-    }
-
-    .project-visual {
-      position: relative;
-      overflow: hidden;
-      aspect-ratio: 16 / 10;
-      border-bottom: 1px solid var(--line);
-      background: var(--preview-bg);
-    }
-
-    .project-card--wide .project-visual {
-      aspect-ratio: 16 / 6.2;
-    }
-
-    .project-visual::after {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: linear-gradient(135deg, rgba(255,255,255,.025), transparent 42%, rgba(255,255,255,.018));
-      content: "";
-    }
-
-    .project-visual svg {
-      display: block;
-      width: 100%;
-      height: 100%;
-      transition: transform 600ms var(--ease);
-    }
-
-    a.project-card:hover .project-visual svg {
-      transform: scale(1.018);
-    }
-
-    .svg-panel { fill: var(--preview-panel); }
-    .svg-bg { fill: var(--preview-bg); }
-    .svg-line { fill: none; stroke: var(--preview-line); }
-    .svg-soft { fill: none; stroke: var(--preview-soft); }
-    .svg-strong { fill: none; stroke: var(--preview-strong); }
-    .svg-fill-soft { fill: var(--preview-soft); }
-    .svg-fill-strong { fill: var(--preview-strong); }
-    .svg-label {
-      fill: var(--preview-soft);
-      font-family: var(--mono);
-      font-size: 13px;
-      letter-spacing: .08em;
-    }
-
-    .trace {
-      stroke-dasharray: 14 8;
-      animation: trace 7s linear infinite;
-    }
-
-    .radar-sweep {
-      transform-origin: 320px 196px;
-      animation: radar 7s linear infinite;
-    }
-
-    .pulse-dot {
-      animation: pulse 2.4s ease-in-out infinite;
-    }
-
-    .pulse-dot:nth-of-type(2) { animation-delay: -.8s; }
-    .pulse-dot:nth-of-type(3) { animation-delay: -1.6s; }
-
-    @keyframes trace {
-      to { stroke-dashoffset: -132px; }
-    }
-
-    @keyframes radar {
-      to { transform: rotate(360deg); }
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: .36; }
-      50% { opacity: 1; }
-    }
-
-    .project-info {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 17px 18px 18px;
-    }
-
-    .project-name {
-      min-width: 0;
-      overflow: hidden;
-      color: var(--text);
-      font-size: 16px;
-      font-weight: 450;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .project-date,
-    .project-arrow {
-      flex: 0 0 auto;
-      color: var(--muted);
-      font-size: 13px;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .project-arrow {
-      display: inline-block;
-      margin-left: 7px;
-      transition: transform 220ms var(--ease), color 180ms ease;
-    }
-
-    a.project-card:hover .project-arrow {
-      color: var(--text);
-      transform: translate(2px, -2px);
-    }
 
     .education-section .entry {
-      grid-template-columns: 50px auto minmax(30px, 1fr) auto;
+      grid-template-columns: 50px minmax(0, 1fr) auto;
     }
 
     .footer {
@@ -701,6 +475,48 @@
       transform: none;
     }
 
+
+    /* Compact desktop layout with breathable section spacing. */
+    @media (min-width: 761px) {
+      .identity { min-height: 0; padding-top: clamp(24px, 3.8vh, 38px); padding-bottom: clamp(21px, 3vh, 30px); }
+      #ascii-orb { width: 68px; height: 68px; flex-basis: 68px; }
+      .intro { min-height: 0; padding-top: clamp(34px, 4.9vh, 48px); padding-bottom: clamp(34px, 4.9vh, 48px); }
+      .intro p { font-size: 17px; line-height: 1.55; }
+      .content-section { padding-top: clamp(29px, 4vh, 40px); padding-bottom: clamp(29px, 4vh, 40px); }
+      .section-head { margin-bottom: clamp(18px, 2.5vh, 25px); }
+      .entry-list { gap: clamp(10px, 1.7vh, 16px); }
+      .footer { min-height: 0; padding-top: clamp(24px, 3.2vh, 32px); padding-bottom: clamp(24px, 3.2vh, 32px); }
+    }
+
+
+    /* Text-inversion reveal for the name and section headings. */
+    .identity h1,
+    .section-head h2 {
+      display: inline-block;
+      width: fit-content;
+      padding: 2px 5px;
+      margin-left: -5px;
+      background-image: linear-gradient(var(--text), var(--text));
+      background-repeat: no-repeat;
+      background-position: left center;
+      background-size: 0% 100%;
+      transition: background-size 260ms var(--ease), color 180ms ease;
+    }
+
+    .identity h1:hover,
+    .section-head h2:hover {
+      background-size: 100% 100%;
+      color: var(--bg);
+    }
+
+    .section-head h2 sup {
+      transition: color 180ms ease;
+    }
+
+    .section-head h2:hover sup {
+      color: var(--bg);
+    }
+
     @media (max-width: 760px) {
       :root {
         --pad-x: 22px;
@@ -738,8 +554,8 @@
 
       .intro {
         min-height: 0;
-        padding-top: 56px;
-        padding-bottom: 58px;
+        padding-top: 48px;
+        padding-bottom: 50px;
       }
 
       .intro p {
@@ -752,8 +568,8 @@
       }
 
       .content-section {
-        padding-top: 56px;
-        padding-bottom: 60px;
+        padding-top: 48px;
+        padding-bottom: 52px;
       }
 
       .section-head {
@@ -779,27 +595,12 @@
         white-space: normal;
       }
 
-      .entry-leader {
-        display: none;
-      }
 
       .entry-period {
         grid-column: 2;
         font-size: 13px;
       }
 
-      .project-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .project-card--wide {
-        grid-column: auto;
-      }
-
-      .project-card--wide .project-visual,
-      .project-visual {
-        aspect-ratio: 16 / 10;
-      }
 
       .footer {
         align-items: flex-start;
@@ -820,19 +621,11 @@
         opacity: .72;
       }
 
-      .theme-toggle {
-        width: 30px;
-        height: 30px;
-      }
 
       .section-action {
         font-size: 13px;
       }
 
-      .project-info {
-        padding-right: 15px;
-        padding-left: 15px;
-      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -854,14 +647,69 @@
         transform: none;
       }
     }
+
+    /* Clean, borderless composition in place of the original grid scaffold. */
+    .page-guides, .cross { display: none !important; }
+    .site-frame { border: 0; }
+    .band::after {
+      width: auto;
+      left: var(--pad-x);
+      right: var(--pad-x);
+      bottom: 0;
+      height: 1px;
+      transform: none;
+      background: var(--line);
+    }
+    .identity { position: relative; }
+    .identity::after { opacity: .65; }
+    .intro { position: relative; }
+    .intro-copy { position: relative; z-index: 1; max-width: 790px; }
+    .footer { opacity: .9; }
+
+    @media (max-height: 670px) and (min-width: 761px) { .site-frame { height: auto; min-height: 100vh; overflow: visible; } }
+    @media (max-width: 760px) {
+      .site-frame { width: min(100% - 32px, var(--frame)); }
+      .band::after { left: var(--pad-x); right: var(--pad-x); }
+    }
+
+    /* Full-viewport ASCII sea from the supplied original animation source. */
+    :root { --ascii-opacity: .79; }
+    #ascii-sea {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      opacity: var(--ascii-opacity);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* A soft scrim keeps the site's type prominent even where the moon passes. */
+    .sea-veil {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 48% 57% at 49% 47%, rgba(11,11,11,.76), transparent 100%),
+        linear-gradient(to bottom, rgba(11,11,11,.06) 0%, rgba(11,11,11,.22) 46%, rgba(11,11,11,.27) 100%);
+    }
+    .site-frame { isolation: isolate; }
+    @media (max-width: 760px) {
+      :root { --ascii-opacity: .52; }
+      .sea-veil { background: rgba(11, 11, 11, .57); }
+      /* Allow the longer university/internship subtitle to wrap cleanly. */
+      .identity-copy { min-width: 0; }
+      .identity-role { font-size: 13px; line-height: 1.42; }
+    }
+
   </style>
 </head>
 <body>
-  <div class="page-guides" aria-hidden="true">
-    <span class="guide-v guide-v--left"></span>
-    <span class="guide-v guide-v--right"></span>
-    <span class="guide-h"></span>
-  </div>
+  <canvas id="ascii-sea" aria-hidden="true"></canvas>
+  <div class="sea-veil" aria-hidden="true"></div>
 
   <main class="site-frame">
     <header class="band identity">
@@ -869,41 +717,17 @@
         <canvas id="ascii-orb" aria-label="Interactive rotating ASCII sphere"></canvas>
         <div class="identity-copy">
           <h1>Aman Rajesh</h1>
-          <p class="identity-role">APU Validation Intern @ AMD</p>
+          <p class="identity-role">ECE @ McMaster University, Prev Hardware Intern @ AMD</p>
         </div>
       </div>
-
-      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme" title="Toggle theme">
-        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
-          <path fill="currentColor" d="M20.1 15.7A8.3 8.3 0 0 1 8.3 3.9 8.4 8.4 0 1 0 20.1 15.7Z"/>
-        </svg>
-        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
-          <circle cx="12" cy="12" r="3.7" fill="currentColor"/>
-          <path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.6 1.6m11 11 1.6 1.6M2 12h2.2M19.8 12H22M4.9 19.1l1.6-1.6m11-11 1.6-1.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-        </svg>
-      </button>
-
-      <span class="cross cross--left" aria-hidden="true"></span>
-      <span class="cross cross--right" aria-hidden="true"></span>
     </header>
 
     <section class="band intro reveal" aria-label="About">
       <div class="intro-copy">
         <p>
-          I work across <strong>APU validation, power test engineering, firmware, and embedded systems</strong>. I’m currently at AMD in Austin while completing a BEng in Computer Engineering at McMaster University.
-        </p>
-        <p>
-          Previously with AMD in Markham, McMaster Formula Electric, and McMaster Chem‑E‑Car. Find me on <a class="inline-link" href="https://linkedin.com/in/aman-rajesh" target="_blank" rel="noopener noreferrer">LinkedIn↗</a> and <a class="inline-link" href="https://github.com/AmanRV" target="_blank" rel="noopener noreferrer">GitHub↗</a>, or reach out at <a class="inline-link" href="mailto:rajesa2@mcmaster.ca">rajesa2@mcmaster.ca</a><button class="copy-email" id="copy-email" type="button" aria-label="Copy email address" title="Copy email address">
-            <svg viewBox="0 0 20 20" aria-hidden="true">
-              <rect x="6.5" y="6.5" width="9" height="9" rx="1.7" fill="none" stroke="currentColor" stroke-width="1.4"/>
-              <path d="M4.2 12.5H4A1.5 1.5 0 0 1 2.5 11V4A1.5 1.5 0 0 1 4 2.5h7A1.5 1.5 0 0 1 12.5 4v.2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-            </svg>
-          </button>.
+          I work across <strong>APU validation, power test engineering, firmware, and embedded systems</strong>. I’m currently in my final year of ECE at McMaster University, graduating in April 2027.
         </p>
       </div>
-
-      <span class="cross cross--left" aria-hidden="true"></span>
-      <span class="cross cross--right" aria-hidden="true"></span>
     </section>
 
     <section class="band content-section reveal" id="experience">
@@ -915,130 +739,27 @@
         <div class="entry" role="listitem">
           <span class="entry-year">2026</span>
           <span class="entry-main">AMD <span>— APU Validation Intern · Austin, TX</span></span>
-          <span class="entry-leader" aria-hidden="true"></span>
           <span class="entry-period">02/26—08/26</span>
         </div>
 
         <div class="entry" role="listitem">
           <span class="entry-year">2025</span>
           <span class="entry-main">AMD <span>— Power Test Engineering Intern · Markham, ON</span></span>
-          <span class="entry-leader" aria-hidden="true"></span>
           <span class="entry-period">05/25—12/25</span>
         </div>
 
         <div class="entry" role="listitem">
           <span class="entry-year">2024</span>
           <span class="entry-main">McMaster Formula Electric <span>— Firmware Team · Hamilton, ON</span></span>
-          <span class="entry-leader" aria-hidden="true"></span>
           <span class="entry-period">09/24—06/25</span>
         </div>
 
         <div class="entry" role="listitem">
           <span class="entry-year">2023</span>
           <span class="entry-main">McMaster Chem‑E‑Car <span>— Circuitry Team · Hamilton, ON</span></span>
-          <span class="entry-leader" aria-hidden="true"></span>
           <span class="entry-period">10/23—05/24</span>
         </div>
       </div>
-
-      <span class="cross cross--left" aria-hidden="true"></span>
-      <span class="cross cross--right" aria-hidden="true"></span>
-    </section>
-
-    <section class="band content-section projects-section reveal" id="projects">
-      <div class="section-head">
-        <h2>Projects<sup>3</sup></h2>
-        <a class="section-action" href="https://github.com/AmanRV" target="_blank" rel="noopener noreferrer">View GitHub ↗</a>
-      </div>
-
-      <div class="project-grid">
-        <article class="project-card" aria-label="sdr.exe, October 2024">
-          <div class="project-visual" aria-hidden="true">
-            <svg viewBox="0 0 640 400" role="img">
-              <defs>
-                <clipPath id="sdr-panel-clip">
-                  <rect x="48" y="50" width="544" height="300" rx="14"/>
-                </clipPath>
-              </defs>
-              <rect class="svg-bg" width="640" height="400"/>
-              <rect class="svg-panel" x="48" y="50" width="544" height="300" rx="14"/>
-              <path class="svg-line" d="M82 96H558M82 139H558M82 182H558M82 225H558M82 268H558M82 311H558" stroke-width="1" opacity=".62"/>
-              <path class="svg-line" d="M106 78V326M154 78V326M202 78V326M250 78V326M298 78V326M346 78V326M394 78V326M442 78V326M490 78V326M538 78V326" stroke-width="1" opacity=".45"/>
-              <path class="svg-strong trace" d="M82 255C108 254 118 245 135 250s25 15 43 9c17-6 18-29 36-33 20-5 29 45 49 36 19-9 19-94 39-99 21-6 29 127 49 115 17-10 18-174 39-181 20-7 25 190 49 189 23-1 26-138 47-143 22-6 24 102 46 110 21 8 27-43 46-47 17-4 23 21 39 24 17 3 24-12 45-10" stroke-width="3" stroke-linecap="round" clip-path="url(#sdr-panel-clip)"/>
-              <path class="svg-soft" d="M82 287C118 286 132 275 164 277s44 15 74 8c27-7 36-38 63-39 29-1 36 45 65 42 31-4 38-69 70-72 33-3 41 61 73 68 22 5 31-8 49-11" stroke-width="1.5" opacity=".7"/>
-              <circle class="svg-fill-strong pulse-dot" cx="393" cy="98" r="4"/>
-              <text class="svg-label" x="82" y="78">SDR / SPECTRUM</text>
-              <text class="svg-label" x="444" y="330">2.437 GHZ</text>
-            </svg>
-          </div>
-          <div class="project-info">
-            <span class="project-name">sdr.exe</span>
-            <span class="project-date">Oct 2024</span>
-          </div>
-        </article>
-
-        <a class="project-card" href="https://github.com/AmanRV/STMScope" target="_blank" rel="noopener noreferrer" aria-label="Open stmscope.bin on GitHub">
-          <div class="project-visual" aria-hidden="true">
-            <svg viewBox="0 0 640 400" role="img">
-              <rect class="svg-bg" width="640" height="400"/>
-              <rect class="svg-panel" x="45" y="48" width="550" height="304" rx="14"/>
-              <path class="svg-line" d="M72 93H568M72 143H568M72 193H568M72 243H568M72 293H568" stroke-width="1" opacity=".55"/>
-              <path class="svg-line" d="M121 74V326M171 74V326M221 74V326M271 74V326M321 74V326M371 74V326M421 74V326M471 74V326M521 74V326" stroke-width="1" opacity=".4"/>
-              <rect class="svg-line" x="98" y="126" width="143" height="147" rx="10" stroke-width="1.5"/>
-              <path class="svg-soft" d="M118 153h77M118 177h96M118 201h62M118 225h88M118 249h48" stroke-width="4" stroke-linecap="round" opacity=".75"/>
-              <rect class="svg-line" x="283" y="118" width="112" height="112" rx="12" stroke-width="2"/>
-              <path class="svg-soft" d="M305 118V96M329 118V96M353 118V96M377 118V96M305 252v-22M329 252v-22M353 252v-22M377 252v-22M283 140h-22M283 164h-22M283 188h-22M283 212h-22M417 140h-22M417 164h-22M417 188h-22M417 212h-22" stroke-width="2"/>
-              <text class="svg-label" x="309" y="170">STM</text>
-              <text class="svg-label" x="307" y="194">SCOPE</text>
-              <path class="svg-strong trace" d="M431 196h20l10-35 15 76 15-55 16 24h19l11-45 14 66 16-31h22" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-              <path class="svg-soft" d="M431 276h126" stroke-width="1.5"/>
-              <circle class="svg-fill-strong pulse-dot" cx="552" cy="276" r="4"/>
-            </svg>
-          </div>
-          <div class="project-info">
-            <span class="project-name">stmscope.bin <span class="project-arrow" aria-hidden="true">↗</span></span>
-            <span class="project-date">Nov 2023</span>
-          </div>
-        </a>
-
-        <a class="project-card project-card--wide" href="https://github.com/AmanRV/Micro-LiDAR" target="_blank" rel="noopener noreferrer" aria-label="Open micro-lidar.py on GitHub">
-          <div class="project-visual" aria-hidden="true">
-            <svg viewBox="0 0 960 372" role="img">
-              <defs>
-                <linearGradient id="sweepGradient" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stop-color="var(--preview-strong)" stop-opacity=".22"/>
-                  <stop offset="1" stop-color="var(--preview-strong)" stop-opacity="0"/>
-                </linearGradient>
-              </defs>
-              <rect class="svg-bg" width="960" height="372"/>
-              <rect class="svg-panel" x="45" y="38" width="870" height="296" rx="14"/>
-              <g transform="translate(100 0)">
-                <circle class="svg-line" cx="320" cy="186" r="116" stroke-width="1"/>
-                <circle class="svg-line" cx="320" cy="186" r="84" stroke-width="1"/>
-                <circle class="svg-line" cx="320" cy="186" r="52" stroke-width="1"/>
-                <circle class="svg-line" cx="320" cy="186" r="20" stroke-width="1"/>
-                <path class="svg-line" d="M204 186h232M320 70v232M238 104l164 164M402 104 238 268" stroke-width="1" opacity=".7"/>
-                <path class="radar-sweep" d="M320 186V70A116 116 0 0 1 410 113Z" fill="url(#sweepGradient)"/>
-                <path class="svg-strong radar-sweep" d="M320 186V70" stroke-width="2.5" stroke-linecap="round"/>
-                <circle class="svg-fill-strong pulse-dot" cx="385" cy="135" r="5"/>
-                <circle class="svg-fill-soft pulse-dot" cx="268" cy="220" r="4"/>
-                <circle class="svg-fill-strong pulse-dot" cx="348" cy="242" r="3.5"/>
-              </g>
-              <path class="svg-soft" d="M592 91h248M592 125h188M592 159h224M592 193h142" stroke-width="5" stroke-linecap="round" opacity=".56"/>
-              <rect class="svg-line" x="592" y="235" width="248" height="52" rx="10" stroke-width="1.5"/>
-              <text class="svg-label" x="614" y="267">RANGE  03.42 M</text>
-              <text class="svg-label" x="592" y="72">MICRO-LIDAR / LIVE SCAN</text>
-            </svg>
-          </div>
-          <div class="project-info">
-            <span class="project-name">micro-lidar.py <span class="project-arrow" aria-hidden="true">↗</span></span>
-            <span class="project-date">Jan 2024</span>
-          </div>
-        </a>
-      </div>
-
-      <span class="cross cross--left" aria-hidden="true"></span>
-      <span class="cross cross--right" aria-hidden="true"></span>
     </section>
 
     <section class="band content-section education-section reveal" id="education">
@@ -1050,13 +771,9 @@
         <div class="entry" role="listitem">
           <span class="entry-year">BEng</span>
           <span class="entry-main">McMaster University <span>— Computer Engineering</span></span>
-          <span class="entry-leader" aria-hidden="true"></span>
           <span class="entry-period">Hamilton, ON</span>
         </div>
       </div>
-
-      <span class="cross cross--left" aria-hidden="true"></span>
-      <span class="cross cross--right" aria-hidden="true"></span>
     </section>
 
     <footer class="footer reveal">
@@ -1072,26 +789,6 @@
   <div class="toast" id="toast" role="status" aria-live="polite">Email copied</div>
 
   <script>
-    (() => {
-      const root = document.documentElement;
-      const toggle = document.getElementById('theme-toggle');
-      const themeMeta = document.querySelector('meta[name="theme-color"]');
-
-      const syncThemeUi = () => {
-        const light = root.dataset.theme === 'light';
-        toggle.setAttribute('aria-label', light ? 'Switch to dark theme' : 'Switch to light theme');
-        themeMeta.setAttribute('content', light ? '#eeeeeb' : '#0b0b0b');
-      };
-
-      toggle.addEventListener('click', () => {
-        const next = root.dataset.theme === 'light' ? 'dark' : 'light';
-        root.dataset.theme = next;
-        try { localStorage.setItem('aman-theme', next); } catch (_) {}
-        syncThemeUi();
-      });
-
-      syncThemeUi();
-    })();
 
     (() => {
       const canvas = document.getElementById('ascii-orb');
@@ -1221,37 +918,596 @@
       requestAnimationFrame(renderOrb);
     })();
 
-    (() => {
-      const button = document.getElementById('copy-email');
-      const toast = document.getElementById('toast');
-      let timer;
-
-      const showToast = () => {
-        clearTimeout(timer);
-        toast.classList.add('is-visible');
-        timer = setTimeout(() => toast.classList.remove('is-visible'), 1700);
-      };
-
-      button.addEventListener('click', async () => {
-        const email = 'rajesa2@mcmaster.ca';
-        try {
-          await navigator.clipboard.writeText(email);
-        } catch (_) {
-          const input = document.createElement('textarea');
-          input.value = email;
-          input.setAttribute('readonly', '');
-          input.style.position = 'fixed';
-          input.style.opacity = '0';
-          document.body.appendChild(input);
-          input.select();
-          document.execCommand('copy');
-          input.remove();
-        }
-        showToast();
-      });
-    })();
 
     document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <script>
+(() => {
+"use strict";
+
+
+var canvas = document.getElementById("ascii-sea");
+var ctx = canvas.getContext("2d", { alpha: false });
+var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+var twinklerate = 0.35;
+var waverate = 0.40;
+var moonbreathe = 0.10;
+var hazerate = 0.35;
+var refaspect = 16 / 9;
+
+var fontstacks = {
+  mono: '"consolas", "cascadia mono", "lucida console", "dejavu sans mono", monospace',
+  plex: '"ibm plex mono", "consolas", monospace',
+  outfit: '"outfit", "segoe ui", sans-serif'
+};
+
+var fontprobes = {
+  mono: "monospace",
+  plex: '"ibm plex mono"',
+  outfit: '"outfit"'
+};
+
+var glyphset = " .:-=+*#%@,'\"`xo~_^/\\";
+
+var cfg = {
+  charsize: 13,
+  font: "plex",
+  stardensity: 0.62,
+  twinklespeed: 0.43,
+  wavespeed: 0.56,
+  waveheight: 1.15,
+  moonsize: 0.96,
+  moonphase: -1,
+  moonx: 0.88,
+  moony: 0.24,
+  horizon: 0.69,
+  shootingstars: true,
+  reflection: true,
+  palette: "slate",
+  tint: null,
+  tintstrength: 0,
+  fps: 24
+};
+
+// Dark, desaturated colors deliberately stay behind the content.
+var palettes = {
+  slate: {
+    bg: [11, 11, 11],
+    star: [105, 116, 126],
+    starwarm: [120, 123, 125],
+    moon: [147, 148, 149],
+    glow: [83, 92, 105],
+    waterfar: [42, 50, 62],
+    waternear: [75, 86, 98],
+    foam: [126, 132, 137]
+  }
+};
+
+var palettecss = [];
+var palettemap = {};
+
+function colorindex(r, g, b) {
+  r = r < 0 ? 0 : r > 255 ? 255 : r | 0;
+  g = g < 0 ? 0 : g > 255 ? 255 : g | 0;
+  b = b < 0 ? 0 : b > 255 ? 255 : b | 0;
+  r &= 0xF8;
+  g &= 0xF8;
+  b &= 0xF8;
+  var key = (r << 16) | (g << 8) | b;
+  var idx = palettemap[key];
+  if (idx === undefined) {
+    idx = palettecss.length;
+    palettecss.push("rgb(" + r + "," + g + "," + b + ")");
+    palettemap[key] = idx;
+  }
+  return idx;
+}
+
+function shade(rgb, b) {
+  var r = rgb[0] * b;
+  var g = rgb[1] * b;
+  var bl = rgb[2] * b;
+  if (cfg.tint && cfg.tintstrength > 0) {
+    var s = cfg.tintstrength;
+    r = r * (1 - s) + r * cfg.tint[0] * s * 1.35;
+    g = g * (1 - s) + g * cfg.tint[1] * s * 1.35;
+    bl = bl * (1 - s) + bl * cfg.tint[2] * s * 1.35;
+  }
+  return colorindex(r, g, bl);
+}
+
+function mix(a, b, t) {
+  return [
+    a[0] + (b[0] - a[0]) * t,
+    a[1] + (b[1] - a[1]) * t,
+    a[2] + (b[2] - a[2]) * t
+  ];
+}
+
+var cols = 0, rows = 0;
+var cellw = 8, cellh = 15, baseline = 12;
+var grid = null;
+var gcol = null;
+var horizonrow = 0;
+var dpr = 1;
+var widek = 1;
+var aspk = 1;
+var monofont = true;
+var charw = {};
+
+var space = 32;
+
+function put(x, y, ch, ci) {
+  if (x < 0 || x >= cols || y < 0 || y >= rows) return;
+  var i = y * cols + x;
+  grid[i] = ch;
+  gcol[i] = ci;
+}
+
+function putunder(x, y, ch, ci) {
+  if (x < 0 || x >= cols || y < 0 || y >= rows) return;
+  var i = y * cols + x;
+  if (grid[i] !== space) return;
+  grid[i] = ch;
+  gcol[i] = ci;
+}
+
+var starchars = [46, 46, 44, 39, 96, 34, 43, 42, 42];
+var stars = [];
+
+function makestars() {
+  var area = cols * Math.max(1, horizonrow);
+  var count = Math.round(area * 0.026 * cfg.stardensity);
+  var seed = 0x2f6e2b1;
+  var rnd = function () {
+    seed = (seed * 1664525 + 1013904223) >>> 0;
+    return seed / 4294967296;
+  };
+  stars = new Array(count);
+  for (var i = 0; i < count; i++) {
+    var bias = rnd();
+    stars[i] = {
+      x: Math.floor(rnd() * cols),
+      y: Math.floor(Math.pow(rnd(), 1.25) * horizonrow),
+      mag: 0.25 + Math.pow(rnd(), 2.2) * 0.95,
+      phase: rnd() * Math.PI * 2,
+      speed: 0.35 + rnd() * 1.7,
+      warm: bias > 0.86,
+      still: bias < 0.35
+    };
+  }
+}
+
+function drawstars(t, pal) {
+  var twinkle = t * cfg.twinklespeed * twinklerate;
+  for (var i = 0; i < stars.length; i++) {
+    var s = stars[i];
+    var b = s.mag;
+    if (!s.still) {
+      var w = Math.sin(twinkle * s.speed + s.phase);
+      b *= 0.58 + 0.42 * w;
+      b *= 1 + 0.35 * Math.pow(Math.max(0, Math.sin(twinkle * s.speed * 0.37 + s.phase * 2)), 12);
+    }
+    if (b < 0.1) continue;
+    var rgb = s.warm ? pal.starwarm : pal.star;
+    var ci = shade(rgb, Math.min(1, b));
+    var ch = starchars[Math.min(starchars.length - 1, Math.floor(b * starchars.length))];
+    put(s.x, s.y, ch, ci);
+  }
+}
+
+var shooters = [];
+var nextshooter = 3 + Math.random() * 8;
+
+function updateshooters(dt) {
+  if (cfg.shootingstars) {
+    nextshooter -= dt;
+    if (nextshooter <= 0) {
+      nextshooter = 6 + Math.random() * 16;
+      var dir = Math.random() < 0.5 ? 1 : -1;
+      shooters.push({
+        x: dir > 0 ? -6 + Math.random() * cols * 0.5 : cols * 0.5 + Math.random() * cols * 0.5,
+        y: Math.random() * horizonrow * 0.6,
+        vx: dir * (48 + Math.random() * 34),
+        vy: 13 + Math.random() * 12,
+        life: 0,
+        span: 1.1 + Math.random() * 0.8,
+        len: 8 + (Math.random() * 10 | 0)
+      });
+    }
+  }
+
+  for (var i = shooters.length - 1; i >= 0; i--) {
+    var s = shooters[i];
+    s.life += dt;
+    s.x += s.vx * dt;
+    s.y += s.vy * dt;
+    if (s.life > s.span || s.y > horizonrow || s.x < -30 || s.x > cols + 30) {
+      shooters.splice(i, 1);
+    }
+  }
+}
+
+function drawshooters(pal) {
+  for (var i = 0; i < shooters.length; i++) {
+    var s = shooters[i];
+    var fade = 1 - s.life / s.span;
+    var slope = s.vy / Math.abs(s.vx);
+    var tailch = s.vx > 0 ? 92 : 47;
+    for (var k = 0; k < s.len; k++) {
+      var f = k / s.len;
+      var px = Math.round(s.x - (s.vx > 0 ? k : -k));
+      var py = Math.round(s.y - k * slope);
+      if (py >= horizonrow) continue;
+      var b = fade * (1 - f) * (1 - f);
+      if (b < 0.08) continue;
+      put(px, py, k === 0 ? 42 : (k < 3 ? tailch : 46), shade(pal.starwarm, b));
+    }
+  }
+}
+
+var moonramp = " .:-=+*#%@";
+var mooncx = 0, mooncy = 0, moonr = 0;
+
+var craters = [
+  [-0.32, -0.18, 0.26, 0.42],
+  [0.18, -0.42, 0.18, 0.34],
+  [0.34, 0.22, 0.30, 0.30],
+  [-0.12, 0.44, 0.20, 0.36],
+  [-0.55, 0.28, 0.15, 0.28],
+  [0.02, 0.02, 0.12, 0.25],
+  [0.52, -0.10, 0.11, 0.22]
+];
+
+function moonglowstrength() {
+  var illum = Math.max(0, Math.min(1, (1 - cfg.moonphase) / 2));
+  return Math.pow(illum, 0.7);
+}
+
+function drawmoon(t, pal) {
+  var rx = moonr / cellw;
+  var ry = moonr / cellh;
+  var x0 = Math.floor(mooncx / cellw - rx - 2);
+  var x1 = Math.ceil(mooncx / cellw + rx + 2);
+  var y0 = Math.floor(mooncy / cellh - ry - 2);
+  var y1 = Math.ceil(mooncy / cellh + ry + 2);
+  var cx = mooncx / cellw;
+  var cy = mooncy / cellh;
+  var breathe = 0.97 + 0.03 * Math.sin(t * moonbreathe);
+  var glow = moonglowstrength();
+
+  for (var y = y0; y <= y1; y++) {
+    if (y < 0 || y >= horizonrow) continue;
+    for (var x = x0; x <= x1; x++) {
+      if (x < 0 || x >= cols) continue;
+      var nx = (x - cx) / rx;
+      var ny = (y - cy) / ry;
+      var d2 = nx * nx + ny * ny;
+
+      if (d2 <= 1.0) {
+        var half = Math.sqrt(Math.max(0, 1 - ny * ny));
+        var term = cfg.moonphase * half;
+        var lit = (nx - term) / Math.max(0.08, half);
+        if (lit <= 0) {
+          var edge = 1 - d2;
+          if (edge > 0.02) putunder(x, y, 46, shade(pal.glow, 0.09 * edge));
+          continue;
+        }
+
+        var b = 0.55 + 0.45 * Math.min(1, lit * 2.2);
+        var rim = 1 - d2 * d2 * d2;
+        b *= 0.28 + 0.72 * rim;
+        for (var c = 0; c < craters.length; c++) {
+          var cr = craters[c];
+          var dx = nx - cr[0];
+          var dy = ny - cr[1];
+          var dd = Math.sqrt(dx * dx + dy * dy) / cr[2];
+          if (dd < 1) b *= 1 - (1 - dd) * cr[3];
+        }
+        b *= breathe;
+
+        var ri = Math.max(1, Math.min(moonramp.length - 1, Math.round(b * (moonramp.length - 1))));
+        put(x, y, moonramp.charCodeAt(ri), shade(pal.moon, Math.min(1, 0.45 + b * 0.6)));
+      } else {
+        var d = Math.sqrt(d2);
+        if (d > 1.75) continue;
+        var f = 1 - (d - 1) / 0.75;
+        var hash = Math.sin(x * 12.9898 + y * 78.233) * 43758.5453;
+        var rnd = hash - Math.floor(hash);
+        if (rnd > f * f * 0.55) continue;
+        var side = 0.25 + 0.75 * Math.max(0, Math.min(1, (nx - cfg.moonphase + 0.6) / 1.6));
+        var hb = (0.10 + 0.30 * f * f) * side * glow;
+        if (hb < 0.02) continue;
+        putunder(x, y, rnd > 0.5 ? 46 : 39, shade(pal.glow, hb));
+      }
+    }
+  }
+}
+
+function drawsea(t, pal) {
+  var waterrows = rows - horizonrow;
+  if (waterrows < 2) return;
+
+  var lines = Math.max(8, Math.round(waterrows * 0.95));
+  var mooncol = mooncx / cellw;
+  var moonwide = moonr / cellw;
+  var wt = t * cfg.wavespeed * waverate;
+  var glow = cfg.reflection ? moonglowstrength() : 0;
+
+  for (var j = 0; j < lines; j++) {
+    var u = lines > 1 ? j / (lines - 1) : 0;
+    var persp = Math.pow(u, 1.55);
+    var base = horizonrow + (waterrows - 1) * persp;
+    var amp = (0.62 + 3.2 * Math.pow(u, 1.8)) * cfg.waveheight;
+    var k1 = (0.30 - 0.24 * u) / aspk;
+    var k2 = (0.17 - 0.13 * u) / aspk;
+    var k3 = (0.08 - 0.055 * u) / aspk;
+    var sp = 0.55 + 2.1 * u;
+    var ph = j * 0.83;
+
+    var water = mix(pal.waterfar, pal.waternear, u);
+    var bodyb = 0.30 + 0.55 * u;
+
+    var prev = null;
+    for (var x = -1; x <= cols; x++) {
+      var w =
+        Math.sin(x * k1 + wt * sp + ph) +
+        0.55 * Math.sin(x * k2 - wt * sp * 0.63 + ph * 1.7) +
+        0.30 * Math.sin(x * k3 + wt * sp * 0.41 + ph * 0.5);
+
+      var swell = 0.78 + 0.22 * Math.sin((x / cols) * 6.2831853 * 1.5 + wt * 0.35 + ph * 0.7);
+      var yy = base + amp * w * 0.42 * swell;
+
+      if (prev !== null && x >= 0 && x < cols) {
+        var d = yy - prev;
+        var ch;
+        if (d > 0.5) ch = 92;
+        else if (d < -0.5) ch = 47;
+        else if (w > 0.9) ch = 126;
+        else if (w < -0.9) ch = 95;
+        else if (w > 0.2) ch = 126;
+        else ch = 45;
+
+        if (u < 0.4 && Math.abs(w) < 0.75 - u) {
+          prev = yy;
+          continue;
+        }
+
+        var b = bodyb;
+        var crest = Math.max(0, (w - 0.7) / 1.15);
+        b += crest * 0.35 * u;
+
+        var rgb = water;
+
+        if (glow > 0.01) {
+          var width = Math.max(1.2, (0.15 + 1.75 * persp) * moonwide * aspk);
+          var dist = Math.abs(x - mooncol) / width;
+          if (dist < 1) {
+            var g = 1 - dist * dist;
+            var shimmer = 0.45 + 0.55 * Math.sin(x * 0.9 / aspk + wt * (1.4 + 2.6 * u) + j * 1.3);
+            var glint = g * shimmer * (0.6 + 0.4 * u) * glow;
+            if (glint > 0.02) {
+              rgb = mix(water, pal.foam, Math.min(0.85, glint));
+              b += glint * 0.55;
+              if (glint > 0.55 && crest > 0.25) ch = 42;
+            }
+          }
+        }
+
+        if (u > 0.55 && crest > 0.55) {
+          var hs = Math.sin(x * 45.233 + j * 91.7 + Math.floor(wt * 6) * 13.7) * 43758.5453;
+          if (hs - Math.floor(hs) > 0.72) {
+            ch = 94;
+            rgb = pal.foam;
+            b = 0.55 + 0.35 * u;
+          }
+        }
+
+        put(x, Math.round(yy), ch, shade(rgb, Math.min(1, b)));
+      }
+      prev = yy;
+    }
+  }
+
+  var hazeci = shade(mix(pal.waterfar, pal.glow, 0.45), 0.22);
+  for (var hx = 0; hx < cols; hx++) {
+    if ((hx + Math.floor(t * hazerate)) % 3 === 0) putunder(hx, horizonrow, 46, hazeci);
+  }
+}
+
+var linebuf = [];
+
+function blit(pal) {
+  ctx.fillStyle = palettecss[shade(pal.bg, 1)];
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.textBaseline = "alphabetic";
+
+  if (monofont) {
+    for (var y = 0; y < rows; y++) {
+      var row = y * cols;
+      var runstart = -1, runcolor = -1, n = 0;
+
+      for (var x = 0; x <= cols; x++) {
+        var ch = x < cols ? grid[row + x] : space;
+        var ci = x < cols ? gcol[row + x] : -1;
+
+        if (ch === space || ci !== runcolor) {
+          if (n > 0) {
+            ctx.fillStyle = palettecss[runcolor];
+            ctx.fillText(linebuf.join(""), runstart * cellw, y * cellh + baseline);
+            linebuf.length = 0;
+            n = 0;
+          }
+          if (ch !== space) {
+            runstart = x;
+            runcolor = ci;
+            linebuf.push(String.fromCharCode(ch));
+            n = 1;
+          } else {
+            runcolor = -1;
+          }
+        } else {
+          linebuf.push(String.fromCharCode(ch));
+          n++;
+        }
+      }
+      linebuf.length = 0;
+    }
+    return;
+  }
+
+  var lastci = -1;
+  for (var py = 0; py < rows; py++) {
+    var prow = py * cols;
+    var ty = py * cellh + baseline;
+    for (var px = 0; px < cols; px++) {
+      var pch = grid[prow + px];
+      if (pch === space) continue;
+      var pci = gcol[prow + px];
+      if (pci !== lastci) {
+        ctx.fillStyle = palettecss[pci];
+        lastci = pci;
+      }
+      var gw = charw[pch];
+      if (gw === undefined) {
+        gw = ctx.measureText(String.fromCharCode(pch)).width;
+        charw[pch] = gw;
+      }
+      ctx.fillText(String.fromCharCode(pch), px * cellw + (cellw - gw) * 0.5, ty);
+    }
+  }
+}
+
+function applyfont(px) {
+  var stack = fontstacks[cfg.font] || fontstacks.mono;
+  ctx.font = px + "px " + stack;
+  charw = {};
+
+  var wi = ctx.measureText("i").width;
+  var ww = ctx.measureText("W").width;
+  monofont = Math.abs(wi - ww) < 0.35;
+
+  if (monofont) {
+    cellw = ctx.measureText("M").width;
+  } else {
+    var total = 0;
+    for (var i = 0; i < glyphset.length; i++) {
+      total += ctx.measureText(glyphset.charAt(i)).width;
+    }
+    cellw = (total / glyphset.length) * 1.15;
+  }
+  if (!(cellw > 0.5)) cellw = px * 0.6;
+}
+
+function loadfont() {
+  if (!document.fonts || !document.fonts.load) return;
+  var probe = fontprobes[cfg.font] || fontprobes.mono;
+  try {
+    document.fonts.load("16px " + probe).then(function () {
+      resize();
+    }, function () {});
+  } catch (e) {}
+}
+
+var lastbufw = -1, lastbufh = -1;
+
+function resize() {
+  dpr = Math.min(1.5, window.devicePixelRatio || 1);
+  var w = Math.max(1, window.innerWidth);
+  var h = Math.max(1, window.innerHeight);
+  var bw = Math.floor(w * dpr);
+  var bh = Math.floor(h * dpr);
+
+  var sizechanged = (bw !== lastbufw || bh !== lastbufh);
+  if (sizechanged) {
+    canvas.width = bw;
+    canvas.height = bh;
+    canvas.style.width = w + "px";
+    canvas.style.height = h + "px";
+    lastbufw = bw;
+    lastbufh = bh;
+    shooters.length = 0;
+  }
+
+  var px = Math.max(6, cfg.charsize * dpr);
+  applyfont(px);
+  cellh = px * 1.05;
+  baseline = px * 0.82;
+
+  cols = Math.max(8, Math.ceil(canvas.width / cellw));
+  rows = Math.max(6, Math.ceil(canvas.height / cellh));
+
+  var refcols = (canvas.height * refaspect) / cellw;
+  widek = Math.min(4, Math.max(0.4, cols / refcols));
+  aspk = Math.sqrt(widek);
+
+  if (!grid || grid.length !== cols * rows) {
+    grid = new Uint16Array(cols * rows);
+    gcol = new Int16Array(cols * rows);
+  }
+
+  horizonrow = Math.max(3, Math.min(rows - 3, Math.round(rows * cfg.horizon)));
+
+  mooncx = canvas.width * cfg.moonx;
+  mooncy = canvas.height * cfg.moony;
+  moonr = Math.min(canvas.width, canvas.height) * 0.13 * cfg.moonsize;
+
+  makestars();
+  renderscene();
+}
+
+var last = performance.now();
+var clock = 0;
+var acc = 0;
+var paused = reducedMotion || document.hidden;
+
+function renderscene() {
+  var pal = palettes[cfg.palette] || palettes.midnight;
+
+  grid.fill(space);
+
+  drawstars(clock, pal);
+  drawshooters(pal);
+  drawmoon(clock, pal);
+  drawsea(clock, pal);
+  blit(pal);
+}
+
+function frame(now) {
+  requestAnimationFrame(frame);
+
+  var dt = (now - last) / 1000;
+  last = now;
+  if (dt > 0.25) dt = 0.25;
+  if (paused) return;
+
+  var step = 1 / Math.max(5, cfg.fps);
+  acc += dt;
+  if (acc < step) return;
+  var used = acc;
+  acc = 0;
+
+  clock += used;
+  updateshooters(used);
+  renderscene();
+}
+
+window.addEventListener("resize", resize);
+document.addEventListener("visibilitychange", function () {
+  paused = reducedMotion || document.hidden;
+  last = performance.now();
+});
+
+resize();
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(function () {
+    resize();
+  }, function () {});
+}
+if (!reducedMotion) requestAnimationFrame(frame);
+})();
   </script>
 </body>
 </html>
